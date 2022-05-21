@@ -7,5 +7,7 @@ export default async function apiRequest({path, method, body}) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(body) ?? null,
+    }).catch((reason)=>{
+        console.log(reason)
     });
 }

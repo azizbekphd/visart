@@ -8,12 +8,45 @@ export default class User {
         this.token = localStorage.getItem("token");
     }
 
-    async login() {
-        await apiRequest({
-            path: "login",
+    login() {
+            return new Promise((resolve, reject) => {
+                if(this.token){
+                    apiRequest({
+                        path: "auth/login/",
+                        method: "POST",
+                        body: {
+                            token: this.token,
+                        }
+                    }).then(async (response)=>{
+                        console.log(await response.text())
+                        resolve(await response.json());
+                    }).catch((e)=>{
+                        reject(e);
+                    });
+                } else {
+                    reject("Token is null")
+                }
+            });
+        // try{
+        //     let response = await apiRequest({
+        //         path: "auth/login",
+        //         method: "POST",
+        //         body: {
+        //             token: this.token,
+        //         }
+        //     });
+        // } catch (e) {
+            
+        // }
+    }
+ 
+    async signIn(login, password) {
+        apiRequest({
+            path: "auth/signin",
             method: "POST",
             body: {
-                token: this.token,
+                login: login,
+                password: password,
             }
         }).then((response)=>{
             console.log(response);
@@ -22,13 +55,13 @@ export default class User {
             this.loggedIn = true;
         })
     }
-
-    async signIn(login, password) {
+ 
+    async signUp(login, password) {
         apiRequest({
-            path: "signin",
+            path: "auth/signup",
             method: "POST",
             body: {
-                login: login,
+                username: login,
                 password: password,
             }
         }).then((response)=>{
