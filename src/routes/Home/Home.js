@@ -1,13 +1,14 @@
 import './Home.css';
 import { useContext, useEffect, useState } from 'react';
 import User from '../../models/User';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 
 function Home({ history }) {
     const { user, setUser } = useContext(UserContext);
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [selectedMenuItem, setSelectedMenuItem] = useState("home");
+    const navigate = useNavigate();
     const menuItems = [
         {
             id: "theater",
@@ -37,16 +38,16 @@ function Home({ history }) {
         <>
             <div className={"App"} onClick={(e) => {
                 if (e.target.id !== "drawer-button" && !document.querySelector("#drawer-button").contains(e.target) && document.location.href.endsWith("#drawer")) {
-                    history.back();
+                    navigate(-1);
                 }
             }}>
                 <header className="App-header">
                     <div className="header__leading">
                         <button id="drawer-button" onClick={() => {
                             if (document.location.href.endsWith("#drawer")) {
-                                history.back();
+                                navigate(-1);
                             } else {
-                                history.push("#drawer");
+                                navigate("#drawer");
                             }
                         }}>
                             <div>

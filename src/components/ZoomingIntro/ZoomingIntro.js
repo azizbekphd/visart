@@ -5,3 +5,5 @@ function ZoomingIntro ({children}) {
         {children}
     </div>
 }
+
+export default ZoomingIntro;

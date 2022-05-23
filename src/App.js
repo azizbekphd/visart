@@ -6,6 +6,8 @@ import User from "./models/User";
 import Splash from "./routes/Splash/Splash";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import SignIn from "./routes/SignIn/SignIn";
+import ZoomingIntro from "./components/ZoomingIntro/ZoomingIntro";
+import SignUp from "./routes/SignUp/SignUp";
 
 function App() {
   const [user, setUser] = useState();
@@ -14,13 +16,13 @@ function App() {
 
   useEffect(() => {
     let u = new User();
-    setUser(u);
     setTimeout(() => {
+      setUser(u);
       u.login().then((_) => {
         console.log(1);
         setUser(u);
       }).catch((e) => {
-        if (e == "Token is null") {
+        if (e == "Token is null" && !["/signin", "/signup"].includes(window.location.pathname)) {
           navigate("/signin", {replace: true});
         } else {
           console.log(e);
@@ -31,16 +33,22 @@ function App() {
 
   return <UserContext.Provider value={{ user, setUser }}>
     {
-      user ?
-      <Routes>
-        <Route path="*" element={
-          <Home history={history}/>
-        } />
-        <Route path="/signin" element={
-          <SignIn />
-        } />
-      </Routes>
-      : <Splash />
+      <>
+        <ZoomingIntro>
+          <Routes>
+            <Route path="*" element={
+              <Home history={history}/>
+            } />
+            <Route path="/signin" element={
+              <SignIn />
+            } />
+            <Route path="/signup" element={
+              <SignUp />
+            } />
+          </Routes>
+        </ZoomingIntro>
+        <Splash />
+      </>
     }
   </UserContext.Provider>
 }

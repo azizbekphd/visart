@@ -2,15 +2,18 @@
     from {
       transform: scale(0.01);
       border-radius: 50%;
+      opacity: 0.7;
     }
   
     to {
       transform: scale(1);
       border-radius: 0;
+      opacity: 1;
     }
   }
 
-.zooming-intro {
+.zooming-intro > * {
+    background-color: var(--bg-color-light);
     animation-name: appearance;
     animation-timing-function: ease-in-out;
     animation-duration: var(--animation-duration);

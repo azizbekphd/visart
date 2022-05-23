@@ -1,0 +1,19 @@
+input {
+    outline: none;
+    border: 1px solid var(--foreground-color-dark);
+    border-width: 0 0 1px 0;
+    background-color: transparent;
+    padding: 8px;
+    margin: 5px 10px;
+    width: 70vmin;
+    font-size: 16px;
+}
+
+input:focus {
+    border-bottom-width: 2px;
+    padding-bottom: 7px;
+}
+
+input:invalid:not(.empty) {
+    border-bottom-color: var(--alert-color);
+}

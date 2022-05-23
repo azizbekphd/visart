@@ -14,6 +14,10 @@ body {
   --foreground-color-light: #3c2900;
 }
 
+input, button {
+  font-family: "Lora", serif;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
