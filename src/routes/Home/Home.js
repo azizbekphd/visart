@@ -3,35 +3,44 @@ import { useContext, useEffect, useState } from 'react';
 import User from '../../models/User';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
+import Gallery from './Gallery/Gallery';
+import Theater from './Theater/Theater';
+import NewPost from './NewPost/NewPost';
 
 function Home({ history }) {
     const { user, setUser } = useContext(UserContext);
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-    const [selectedMenuItem, setSelectedMenuItem] = useState("home");
+    const [selectedMenuItem, setSelectedMenuItem] = useState("theater");
     const navigate = useNavigate();
     const menuItems = [
         {
             id: "theater",
+            path: "theater",
             icon: "theater_comedy",
+            element: Theater,
         },
         {
             id: "new_post",
+            path: "new_post",
             icon: "add_box",
+            element: NewPost,
         },
         {
-            id: "pictures",
-            icon: "brush",
+            id: "gallery",
+            path: "gallery",
+            icon: "image",
+            element: Gallery,
         },
     ]
 
     useEffect(() => {
-        setDrawerIsOpen(document.location.href.includes("#drawer"));
+        history.listen((location) => {
+            setDrawerIsOpen(document.location.href.includes("#drawer"));
+        })
     }, [])
 
     useEffect(() => {
-        return history.listen((location) => {
-            setDrawerIsOpen(document.location.href.includes("#drawer"));
-        })
+        setDrawerIsOpen(document.location.href.includes("#drawer"));
     }, [history])
 
     return (
@@ -63,7 +72,13 @@ function Home({ history }) {
                 </header>
                 <main>
                     <Routes>
-                        <Route path="/"></Route>
+                        <Route path="/" element={<h1>asdasdasd</h1>}/>
+                        {menuItems.map((menuItem)=>{
+                            return <Route
+                                key={menuItem.id}
+                                path={menuItem.path}
+                                element={<menuItem.element/>} />
+                        })}
                     </Routes>
                 </main>
                 <nav className="bottomNavigationMenu">
@@ -78,6 +93,7 @@ function Home({ history }) {
                                     onChange={(e) => {
                                         if (e.target.checked) {
                                             setSelectedMenuItem(item.id);
+                                            navigate(item.path)
                                         }
                                     }} />
                                 <label htmlFor={item.id} >

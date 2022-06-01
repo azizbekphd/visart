@@ -9,6 +9,7 @@ function PasswordInput(props) {
     }
 
     return <div className="password-input">
+        {props.required ? <span className="required_label">*</span> : null}
         <input
             {...props}
             type={visible ? "text" : "password"}

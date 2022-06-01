@@ -1,6 +1,6 @@
 body {
   background-color: var(--bg-color-light);
-  --animation-duration: 1.5s;
+  --animation-duration: 1s;
   color: var(--foreground-color-dark);
 }
 
@@ -80,10 +80,6 @@ body {
   width: 100px;
   object-fit: cover;
   object-position: 0 -10px;
-}
-
-main {
-  padding: 15px;
 }
 
 .header__leading {

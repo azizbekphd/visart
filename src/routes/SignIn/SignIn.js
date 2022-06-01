@@ -1,10 +1,16 @@
 import "./SignIn.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import TextInput from "../../components/TextInput/TextInput";
+import UserContext from "../../contexts/UserContext";
+import apiRequest from "../../utils/apiRequest";
 
 function SignIn() {
+
+    const {setUser, saveToken} = useContext(UserContext)
+
+    const navigate = useNavigate()
 
     const [data, setData] = useState({
         "login": "",
@@ -26,7 +32,20 @@ function SignIn() {
     }
 
     function handleSubmit (e) {
-        console.log(e);
+        e.preventDefault();
+        apiRequest({
+            path: "auth/signin/",
+            method: "POST",
+            body: data,
+        }).then((response)=>{
+            response.json().then((user)=>{
+                setUser(user)
+                saveToken(user["token"])
+                window.location.replace("/")
+            })
+        }).catch((reason)=>{
+            console.log(reason);
+        })
     }
 
     return (

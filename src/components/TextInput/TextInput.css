@@ -17,3 +17,10 @@ input:focus {
 input:invalid:not(.empty) {
     border-bottom-color: var(--alert-color);
 }
+
+.required_label {
+    width: 0;
+    position: absolute;
+    transform: translate(0, 8px);
+    align-self: flex-start;
+}

@@ -1,7 +1,7 @@
 import "./ZoomingIntro.css";
 
-function ZoomingIntro ({children}) {
-    return <div className="zooming-intro">
+function ZoomingIntro ({children, loaded}) {
+    return <div className={["zooming-intro", loaded ? "loaded" : ""].join(" ")}>
         {children}
     </div>
 }

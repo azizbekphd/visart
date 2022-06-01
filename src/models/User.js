@@ -18,7 +18,7 @@ export default class User {
                             token: this.token,
                         }
                     }).then(async (response)=>{
-                        console.log(await response.text())
+                        //console.log(await response.text())
                         resolve(await response.json());
                     }).catch((e)=>{
                         reject(e);

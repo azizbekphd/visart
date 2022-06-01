@@ -12,10 +12,20 @@
     }
   }
 
-.zooming-intro > * {
+.zooming-intro {
     background-color: var(--bg-color-light);
-    animation-name: appearance;
-    animation-timing-function: ease-in-out;
-    animation-duration: var(--animation-duration);
-    animation-iteration-count: 1;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: ease-out;
+}
+
+.zooming-intro:not(.loaded) {
+  transform: scale(0.001);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.zooming-intro.loaded {
+  transform: scale(1);
+  border-radius: 0;
+  opacity: 1;
 }
