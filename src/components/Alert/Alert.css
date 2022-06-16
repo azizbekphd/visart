@@ -1,0 +1,49 @@
+.alert-dialog-wrapper {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000055;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-dialog {
+    width: 70vmin;
+    background-color: var(--bg-color-light);
+    padding: 8px;
+    box-shadow: 0 0 5px 0 #555;
+}
+
+.alert-dialog h3 {
+    margin: 15px;
+}
+
+.alert-dialog h4 {
+    margin: 15px;
+    font-weight: normal;
+}
+
+.alert-dialog__buttons {
+    width: calc(100% - 30px);
+    padding: 0 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.alert-dialog__buttons h3:active {
+    opacity: 0.7;
+}
+
+.alert-dialog__button {
+    transition-duration: 0.3s;
+}
+
+.alert-dialog__button:active {
+    opacity: 0.7;
+}

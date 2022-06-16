@@ -13,13 +13,15 @@ export default class User {
                 if(this.token){
                     apiRequest({
                         path: "auth/login/",
-                        method: "POST",
-                        body: {
-                            token: this.token,
+                        headers: {
+                            "Authorization": `Bearer ${this.token}`,
                         }
                     }).then(async (response)=>{
                         //console.log(await response.text())
-                        resolve(await response.json());
+                        resolve({
+                            ...await response.json(),
+                            token: this.token,
+                        });
                     }).catch((e)=>{
                         reject(e);
                     });
@@ -49,7 +51,6 @@ export default class User {
                 password: password,
             }
         }).then((response)=>{
-            console.log(response);
             this.loggedIn = true;
         }).finally(()=>{
             this.loggedIn = true;
@@ -65,7 +66,6 @@ export default class User {
                 password: password,
             }
         }).then((response)=>{
-            console.log(response);
             this.loggedIn = true;
         }).finally(()=>{
             this.loggedIn = true;

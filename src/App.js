@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import UserContext, {saveToken} from "./contexts/UserContext";
+import UserContext, { saveToken } from "./contexts/UserContext";
 import Home from "./routes/Home/Home";
 import { createBrowserHistory } from 'history';
 import User from "./models/User";
@@ -8,6 +8,9 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import SignIn from "./routes/SignIn/SignIn";
 import ZoomingIntro from "./components/ZoomingIntro/ZoomingIntro";
 import SignUp from "./routes/SignUp/SignUp";
+import NewVideo from "./routes/New/NewVideo/NewVideo";
+import NewImage from "./routes/New/NewImage/NewImage";
+import PostDetails from "./routes/PostDetails/PostDetails";
 
 function App() {
   const [user, setUser] = useState();
@@ -16,7 +19,11 @@ function App() {
   const navigate = useNavigate()
 
   function getToken() {
-    return user.token
+    if (user) {
+      return user.token
+    } else {
+
+    }
   }
 
   useEffect(() => {
@@ -24,28 +31,39 @@ function App() {
     setTimeout(() => {
       setUser(u);
       u.login().then((_) => {
-        console.log(1);
         setUser(_);
       }).catch((e) => {
-        if (e == "Token is null" && !["/signin", "/signup"].includes(window.location.pathname)) {
-          navigate("/signin", {replace: true});
+        if (e === "Token is null" && !["/signin", "/signup"].includes(window.location.pathname)) {
+          navigate("/signin", { replace: true });
         } else {
           console.log(e);
         }
-      }).finally(()=>{
+      }).finally(() => {
         setLoaded(true);
       })
     }, 2000);
-  }, [])
+  }, [navigate])
 
   return <UserContext.Provider value={{ user, setUser, saveToken, getToken }}>
     {
       <>
         <ZoomingIntro loaded={loaded}>
           <Routes>
-            <Route path="*" element={
-              <Home history={history}/>
-            } />
+            {user && user.token ?
+              <>
+                <Route path="*" element={
+                  <Home history={history} />
+                } />
+                <Route path="/new/video" element={
+                  <NewVideo />
+                } />
+                <Route path="/new/image" element={
+                  <NewImage />
+                } />
+                <Route path="/post/details" element={
+                  <PostDetails />
+                } />
+              </> : <></>}
             <Route path="/signin" element={
               <SignIn />
             } />

@@ -1,0 +1,47 @@
+.scaffold-root {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--bg-color-light);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.scaffold-app-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 0 5px 0 #555;
+    position: sticky;
+}
+
+.scaffold-app-bar__back {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
+.scaffold-app-bar__back span {
+    font-size: 30px;
+}
+
+.scaffold-app-bar__title {
+    flex: 1;
+}
+
+.scaffold-body {
+    flex: 1;
+}

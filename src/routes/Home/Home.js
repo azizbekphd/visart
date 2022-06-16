@@ -1,22 +1,21 @@
 import './Home.css';
 import { useContext, useEffect, useState } from 'react';
-import User from '../../models/User';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import Gallery from './Gallery/Gallery';
 import Theater from './Theater/Theater';
 import NewPost from './NewPost/NewPost';
 
-function Home({ history }) {
+function Home({ history, defaultRoute }) {
     const { user, setUser } = useContext(UserContext);
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-    const [selectedMenuItem, setSelectedMenuItem] = useState("theater");
+    const [selectedMenuItem, setSelectedMenuItem] = useState(defaultRoute ?? document.location.pathname.split("/")[1] ?? "new_post");
     const navigate = useNavigate();
     const menuItems = [
         {
             id: "theater",
             path: "theater",
-            icon: "theater_comedy",
+            icon: "movie",
             element: Theater,
         },
         {
@@ -46,7 +45,10 @@ function Home({ history }) {
     return (
         <>
             <div className={"App"} onClick={(e) => {
-                if (e.target.id !== "drawer-button" && !document.querySelector("#drawer-button").contains(e.target) && document.location.href.endsWith("#drawer")) {
+                if (e.target.id !== "drawer-button" &&
+                    !document.querySelector("#drawer-button").contains(e.target) &&
+                    document.location.href.endsWith("#drawer") &&
+                    !document.querySelector(".drawer-content").contains(e.target)) {
                     navigate(-1);
                 }
             }}>
@@ -72,12 +74,12 @@ function Home({ history }) {
                 </header>
                 <main>
                     <Routes>
-                        <Route path="/" element={<h1>asdasdasd</h1>}/>
-                        {menuItems.map((menuItem)=>{
+                        <Route path="/" element={<div className=''></div>} />
+                        {menuItems.map((menuItem) => {
                             return <Route
                                 key={menuItem.id}
                                 path={menuItem.path}
-                                element={<menuItem.element/>} />
+                                element={<menuItem.element />} />
                         })}
                     </Routes>
                 </main>
@@ -105,7 +107,11 @@ function Home({ history }) {
                         })
                     }
                 </nav>
-                <aside id="drawer" className={drawerIsOpen ? "opened" : ""}></aside>
+                <aside id="drawer" className={drawerIsOpen ? "opened" : ""}>
+                    <div className="drawer-content">
+
+                    </div>
+                </aside>
             </div>
         </>
     );
