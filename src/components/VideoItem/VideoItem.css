@@ -44,3 +44,7 @@
             line-clamp: 2; 
     -webkit-box-orient: vertical;
 }
+
+.video-item__author {
+    color: var(--foreground-color-light);
+}

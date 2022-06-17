@@ -172,3 +172,13 @@ body {
     height: 100%;
     margin: -60px 0 -50px 0;
   }
+
+  .App::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .App {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

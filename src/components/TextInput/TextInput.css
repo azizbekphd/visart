@@ -1,20 +1,26 @@
-input {
+input, textarea {
     outline: none;
     border: 1px solid var(--foreground-color-dark);
     border-width: 0 0 1px 0;
     background-color: transparent;
     padding: 8px;
     margin: 5px 10px;
-    width: 70vmin;
+    max-width: 70vmin;
+    width: 100%;
     font-size: 16px;
 }
 
-input:focus {
+textarea {
+    font-family: "Lora", serif;
+    resize: none;
+}
+
+input:focus, textarea:focus {
     border-bottom-width: 2px;
     padding-bottom: 7px;
 }
 
-input:invalid:not(.empty) {
+input:invalid:not(.empty),  textarea:invalid:not(.empty){
     border-bottom-color: var(--alert-color);
 }
 

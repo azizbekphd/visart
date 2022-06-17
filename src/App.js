@@ -60,7 +60,7 @@ function App() {
                 <Route path="/new/image" element={
                   <NewImage />
                 } />
-                <Route path="/post/details" element={
+                <Route path="/p/:id" element={
                   <PostDetails />
                 } />
               </> : <></>}

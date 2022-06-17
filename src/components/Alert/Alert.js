@@ -12,7 +12,7 @@ function Alert({title, message, buttons, visible, setVisible}) {
                     return <h3 onClick={()=>{
                         setVisible(false)
                         b.callback && b.callback()
-                    }} className="alert-dialog__button">{b.title.toString()}</h3>
+                    }} className="alert-dialog__button" key={b.title.toString()}>{b.title.toString()}</h3>
                 })}
             </div>
         </div>
