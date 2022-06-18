@@ -62,7 +62,7 @@ body {
     flex-direction: row;
     align-items: center;
     background: linear-gradient(135deg, var(--bg-color-light) 30%, transparent);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(5px);
     justify-content: flex-start;
     position: sticky;
     position: -webkit-sticky;

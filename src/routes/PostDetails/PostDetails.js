@@ -40,7 +40,7 @@ function PostDetails(props) {
     const loadData = useCallback(async () => {
         setIsLoading(true);
         await apiRequest({
-            path: `post/details/${id}`,
+            path: `post/details/${id}/`,
             headers: {
                 "Authorization": `Bearer ${getToken()}`
             }

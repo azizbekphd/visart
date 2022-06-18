@@ -14,7 +14,7 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     min-width: 150px;
-    max-width: 150px;;
+    max-width: 150px;
 }
 
 .video-item__thumbnail {
@@ -47,4 +47,24 @@
 
 .video-item__author {
     color: var(--foreground-color-light);
+}
+
+@media screen and (min-width: 540px) {
+    .video-item {
+        flex-direction: column;
+        max-width: 250px;
+        height: 215px;
+    }
+    .video-item__thumbnail-wrapper {
+        align-self: stretch;
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+    .video-item__thumbnail {
+        align-self: stretch;
+    }
 }

@@ -98,7 +98,7 @@ function NewVideo() {
                         thumbnail={preview.thumbnail}
                         title={preview.title}/>
                     <button type="submit">
-                        Post
+                        Publish
                     </button>
                 </form>
             </Center>

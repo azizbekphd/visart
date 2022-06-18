@@ -41,11 +41,9 @@ function Theater() {
     return <div className="theater-wrapper">
         {videos
             ? <>
-                <div style={{height: "60px"}}></div>
                 {videos.map((item, index) => {
                     return <VideoItem data={item} key={item.id} />
                 })}
-                <div style={{height: "50px"}}></div>
             </> :
             <Center style={{ height: "100%" }}>
                 {

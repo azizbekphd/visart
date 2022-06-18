@@ -11,7 +11,9 @@ function VideoItem ({data}) {
             <Link to={`/p/${id}`}>
                 <h4 className="video-item__title" title={title}>{title}</h4>
             </Link>
-            <h5 className="video-item__author">{author.username}</h5>
+            <div className="video-item__secondary-data">
+                <h5 className="video-item__author">{author.username}</h5>
+            </div>
         </div>
     </div>
 }

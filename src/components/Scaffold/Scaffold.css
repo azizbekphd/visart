@@ -38,10 +38,7 @@
     font-size: 30px;
 }
 
-.scaffold-app-bar__title {
-    flex: 1;
-}
-
 .scaffold-body {
     flex: 1;
+    background-color: var(--bg-color-light);
 }

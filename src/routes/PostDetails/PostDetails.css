@@ -73,3 +73,9 @@
 .post-details__new_comment > *:first-child {
     flex: 1;
 }
+
+@media screen and (min-width: 540px) {
+    .youtube_video {
+        position: relative;
+    }
+}
