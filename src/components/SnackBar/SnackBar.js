@@ -16,7 +16,7 @@ function SnackBar({message}) {
         } else {
             setTimeout(()=>{
                 setVisible(false);
-            }, 300);
+            }, 150);
         }
     },[message])
 

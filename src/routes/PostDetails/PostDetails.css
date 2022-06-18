@@ -4,6 +4,7 @@
     aspect-ratio: 16 / 9;
     position: sticky;
     top: 0;
+    z-index: 300;
 }
 
 .post-details-content {
@@ -37,6 +38,8 @@
     padding: 8px;
     width: calc(100% - 16px);
     max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post-details__button {
@@ -61,8 +64,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: calc(100%);
-    max-width: 30rem;
+    width: 100%;
+    max-width: 50rem;
     margin: 0 auto;
     align-self: stretch;
+}
+
+.post-details__new_comment > *:first-child {
+    flex: 1;
 }

@@ -26,18 +26,22 @@
     max-width: 25rem;
     text-align: center;
     z-index: 1500;
+    opacity: 0.9;
 }
 
 .snackbar-wrapper.visible {
-    animation: snackbar-appearance 0.3s linear 0s 1 normal forwards;
+    animation: snackbar-appearance 0.15s ease-out 0s 1 normal forwards;
 }
 
 .snackbar-wrapper.invisible {
-    animation: snackbar-disappearance 0.3s linear 0s 1 normal forwards;
+    animation: snackbar-disappearance 0.15s ease-in 0s 1 normal forwards;
 }
 
 .snackbar {
     padding: 15px;
     box-shadow: 0 0 5px 0 #555;
     border-radius: 5px;
+    background: var(--foreground-color-dark);
+    color: var(--bg-color-light);
+    backdrop-filter: blur(5px);
 }

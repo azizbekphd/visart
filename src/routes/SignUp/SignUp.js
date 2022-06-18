@@ -35,12 +35,16 @@ function SignUp() {
             path: "auth/signup/",
             method: "POST",
             body: data,
-        }).then((response)=>{
-            response.json().then((user)=>{
-                setUser(user)
-                saveToken(user["token"])
-                navigate("/", {replace: true})
-            })
+        }).then(async (response)=>{
+            if(response.ok){
+                response.json().then((user)=>{
+                    setUser(user)
+                    saveToken(user["token"])
+                    navigate("/", {replace: true})
+                })
+            } else {
+                console.log(await response.text())
+            }
         }).catch((reason)=>{
             console.log(reason);
         })
