@@ -1,0 +1,19 @@
+.gallery-wrapper {
+    width: 100%;
+    min-width: 266px;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 60px 0 50px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@media screen and (min-width: 540px) {
+    .gallery-wrapper {
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-width: 900px;
+    }
+}

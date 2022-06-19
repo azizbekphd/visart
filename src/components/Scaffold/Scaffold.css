@@ -41,4 +41,6 @@
 .scaffold-body {
     flex: 1;
     background-color: var(--bg-color-light);
+    max-height: calc(100vh - 60px);
+    overflow: auto;
 }

@@ -42,6 +42,7 @@
 
 .alert-dialog__button {
     transition-duration: 0.3s;
+    cursor: pointer;
 }
 
 .alert-dialog__button:active {

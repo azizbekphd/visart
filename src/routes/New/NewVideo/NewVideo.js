@@ -105,8 +105,8 @@ function NewVideo() {
             <Alert
                 visible={alertVisible}
                 setVisible={setAlertVisible}
-                title={"Video has been sent"}
-                message={"Video will be published after verification"}
+                title={"Video sent"}
+                message={"The video will be published after verification"}
                 buttons={[{
                     title:"OK",
                     callback: ()=>{

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Center from "../../components/Center/Center";
 import Comment from "../../components/Comment/Comment";
@@ -8,15 +8,25 @@ import SnackBar from "../../components/SnackBar/SnackBar";
 import TextInput from "../../components/TextInput/TextInput";
 import UserContext from "../../contexts/UserContext";
 import apiRequest from "../../utils/apiRequest";
-import "./PostDetails.css"
+import "./PostDetails.css";
+import { MapInteractionCSS } from 'react-map-interaction';
+import getTimezone from "../../utils/getTimezone";
 
 function PostDetails(props) {
     const { id } = useParams()
     const { getToken } = useContext(UserContext)
     const navigate = useNavigate()
+    const imageWrapper = useRef()
+    const image = useRef()
 
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState()
+    const [aspectRatio, setAspectRatio] = useState("1/1")
+    const [initialScale, setInitialScale] = useState(1)
+    const [imageViewerValue, setImageViewerValue] = useState({
+        scale: 1,
+        translation: {x: 0, y: 0}
+    })
     const [data, setData] = useState({
         ok: true,
         type: null,
@@ -111,7 +121,7 @@ function PostDetails(props) {
             },
             method: "POST",
             body: {
-                timezone: (new Date()).getTimezoneOffset() / 60,
+                timezone: getTimezone(),
             }
         }).then(async (response) => {
             if (response.ok) {
@@ -128,6 +138,7 @@ function PostDetails(props) {
     useEffect(() => {
         loadData()
         loadComments()
+        window.onresize = handleResize;
     }, [])
 
     async function leaveComment(event){
@@ -139,7 +150,7 @@ function PostDetails(props) {
             },
             method: "POST",
             body: {
-                timezone: (new Date()).getTimezoneOffset() / 60,
+                timezone: getTimezone(),
                 text: comment,
             }
         }).then(async (response) => {
@@ -155,6 +166,31 @@ function PostDetails(props) {
         })
     }
 
+    function handleImageViewer(value){
+        if (value.scale <= initialScale) {
+            setImageViewerValue({
+                scale: 1,
+                translation: {x: 0, y: 0}
+            })
+        }
+        let newValue = {
+            scale: value.scale,
+            translation: value.translation,
+        }
+        setImageViewerValue(newValue)
+    }
+
+    function handleResize(e){
+        console.log(imageWrapper.current.clientWidth, image.current.clientWidth)
+        setAspectRatio(`${image.current.clientWidth} / ${image.current.clientHeight}`)
+        let initScale = imageWrapper.current.clientWidth / image.current.clientWidth;
+        setInitialScale(initScale)
+        setImageViewerValue({
+            translation: {x: 0, y: 0},
+            scale: initScale,
+        })
+    }
+
     return <Scaffold
         title={data.author.username}
         titleAction={() => {
@@ -162,17 +198,47 @@ function PostDetails(props) {
         }} >
         {data.type
             ? <div className="post-details-content">
-                <iframe
-                    className="youtube_video"
-                    src={`${data.source}`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen="allowfullscreen"
-                    mozallowfullscreen="mozallowfullscreen"
-                    msallowfullscreen="msallowfullscreen"
-                    oallowfullscreen="oallowfullscreen"
-                    webkitallowfullscreen="webkitallowfullscreen"></iframe>
+                {data.type === "video" ?
+                    <iframe
+                        className="youtube_video"
+                        src={`${data.source}`}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen="allowfullscreen"
+                        mozallowfullscreen="mozallowfullscreen"
+                        msallowfullscreen="msallowfullscreen"
+                        oallowfullscreen="oallowfullscreen"
+                        webkitallowfullscreen="webkitallowfullscreen"></iframe>:
+                    <div
+                        className="post-image__wrapper"
+                        ref={imageWrapper}
+                        style={{
+                            aspectRatio: aspectRatio,
+                        }}
+                    >
+                        <MapInteractionCSS
+                            value={imageViewerValue}
+                            onChange={handleImageViewer}
+                        >
+                            <img
+                                ref={image}
+                                src={data.source}
+                                className="post-image"
+                                onLoad={handleResize}
+                                onDoubleClick={()=>{
+                                    if (imageViewerValue.scale != initialScale ||
+                                        imageViewerValue.translation.x != 0 ||
+                                        imageViewerValue.translation.y != 0) {
+                                            setImageViewerValue({
+                                                translation: {x: 0, y: 0},
+                                                scale: initialScale,
+                                            })
+                                        }
+                                }}
+                            />
+                        </MapInteractionCSS>
+                    </div>}
                 <div className="post-details__data">
                     <h3 className="post-details__title">{data.title}</h3>
                     <h5 className="post-details__views">{data.stats.views} views</h5>

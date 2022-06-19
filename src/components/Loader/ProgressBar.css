@@ -1,0 +1,21 @@
+.progress-bar {
+    width: 200px;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.progress-bar__progress {
+    background-color: var(--primary-color-light);
+    transition-duration: 0.1s;
+}
+
+.progress-bar__left {
+    background-color: black;
+    opacity: 0.6;
+}
