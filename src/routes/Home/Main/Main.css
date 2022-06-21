@@ -34,16 +34,20 @@
 .main__page > * {
     position: relative;
     width: 100vw;
-    max-width: 50rem;
-    height: calc(100vh - 110px);
+    min-height: calc(100vh - 110px);
+    max-height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     justify-content: flex-start;
+    margin-left: auto;
+    margin-right: auto;
     background-color: var(--bg-color-light);
 }
 
 .main__page img {
     object-fit: cover;
-    height: 500px;
-    max-height: 500px;
+    min-height: calc(100vh - 220px);
+    height: calc(100vh - 220px);
+    max-height: calc(100vh - 220px);
 }
