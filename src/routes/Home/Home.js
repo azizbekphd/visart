@@ -5,6 +5,7 @@ import UserContext from '../../contexts/UserContext';
 import Gallery from './Gallery/Gallery';
 import Theater from './Theater/Theater';
 import NewPost from './NewPost/NewPost';
+import Main from './Main/Main';
 
 function Home({ history, defaultRoute }) {
     const { user, setUser } = useContext(UserContext);
@@ -74,7 +75,7 @@ function Home({ history, defaultRoute }) {
                 </header>
                 <main>
                     <Routes>
-                        <Route path="/" element={<div className=''></div>} />
+                        <Route path="/" element={<Main/>} />
                         {menuItems.map((menuItem) => {
                             return <Route
                                 key={menuItem.id}

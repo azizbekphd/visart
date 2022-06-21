@@ -16,7 +16,7 @@ function Gallery() {
     async function loadImages() {
         setIsLoading(true)
         await apiRequest({
-            path: "/post/gallery/",
+            path: "post/gallery/",
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${getToken()}`
