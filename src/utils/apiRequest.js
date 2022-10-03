@@ -1,4 +1,4 @@
-export var api = "http://visart.pythonanywhere.com/";
+export var api = "https://visart.pythonanywhere.com/";
 
 export default async function apiRequest({path, method, body, headers}) {
     return fetch(api + path, {
